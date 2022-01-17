@@ -1,0 +1,75 @@
+server:
+    #logfile: "/var/log/unbound/unbound.log"
+    verbosity: 0
+    num-threads: 1
+    interface: 127.0.0.1
+    port: 5335
+    so-reuseport: yes
+    edns-buffer-size: 1472
+    do-daemonize: no
+    cache-min-ttl: 0
+    cache-max-ttl: 86400
+    username: "_unbound"
+    
+    do-ip4: yes
+    do-udp: yes
+    do-tcp: yes
+    max-udp-size: 3072
+    do-ip6: no
+    prefer-ip6: no
+    #root-hints: "/var/lib/unbound/root.hints"
+
+    harden-algo-downgrade: yes
+    harden-short-bufsize: yes
+    harden-large-queries: yes
+    harden-glue: yes
+    harden-dnssec-stripped: yes
+
+    rrset-roundrobin: yes
+
+    serve-expired: yes
+ 
+ 
+    log-queries: no
+    hide-version: yes
+    hide-identity: yes
+    identity: "Server"
+
+
+    neg-cache-size: 4m
+    qname-minimisation: yes
+    deny-any: yes
+    minimal-responses: yes
+    prefetch: yes
+    prefetch-key: yes
+ 
+    msg-cache-size: 128m
+    rrset-cache-size: 256m
+ 
+    so-rcvbuf: 4m
+    so-sndbuf: 4m
+
+    unwanted-reply-threshold: 100000
+
+    log-replies: no
+    log-servfail: no
+    log-local-actions: no
+    logfile: /dev/null
+
+    private-address: 192.168.0.0/16
+    private-address: 169.254.0.0/16
+    private-address: 172.16.0.0/12
+    private-address: 10.0.0.0/8
+    private-address: fd00::/8
+    private-address: fe80::/10
+    private-address: ::ffff:0:0/96
+
+    access-control: 0.0.0.0/0 refuse
+    access-control: 192.168.0.0/16 allow
+    access-control: 172.16.0.0/12 allow
+    access-control: 127.0.0.1/32 allow
+
+    # Create DNS record for Pi-Hole Web Interface
+    #private-domain: "toa.lan"
+    #local-zone: "toa.lan" static
+    #local-data: "toa.lan IN A 192.168.x.x"

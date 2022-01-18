@@ -8,5 +8,6 @@ COPY /var /var
 RUN wget https://www.internic.net/domain/named.root -qO- | sudo tee /var/lib/unbound/root.hints
 COPY start_unbound_and_s6_init.sh start_unbound_and_s6_init.sh
 
+RUN chmod +rwx /var/log/unbound
 RUN chmod +x start_unbound_and_s6_init.sh
 ENTRYPOINT ./start_unbound_and_s6_init.sh

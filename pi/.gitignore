@@ -1,0 +1,7 @@
+01-pihole.conf
+pihole-FTL.conf
+setupVars.conf
+setupVars.conf.update.bak
+50-dhcp_extra.conf
+*.db
+dhcp.leases

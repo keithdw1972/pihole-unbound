@@ -10,13 +10,19 @@ services:
     image: keithdw/pihole-unbound:latest
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
+    mac_address: d0:ca:ab:cd:ed:01
+    cap_add:
+      - NET_ADMIN
+    networks:
+      pihole_network:
+        ipv4_address: 192.168.170.3
     ports:
       - 443:443/tcp
       - 53:53/tcp
       - 53:53/udp
       - 80:80/tcp
-      # - 5335:5335/tcp # Uncomment to enable unbound access on local server
-      # - 22/tcp # Uncomment to enable SSH
+      - 5335:5335/tcp # Uncomment to enable unbound access on local server
+      #- 22/tcp # Uncomment to enable SSH
     environment:
       ServerIP: ${ServerIP}
       TZ: ${TZ}
@@ -32,3 +38,14 @@ services:
       - etc_pihole-unbound:/etc/pihole:rw
       - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
     restart: unless-stopped
+
+networks:
+  pihole_network:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 192.168.170.0/24            # <-- Update
+          gateway: 192.168.170.1              # <-- Update
+          ip_range: 192.168.170.3/32        # <-- Update

@@ -16,7 +16,7 @@ services:
       - "80:80/tcp"
     environment:
       TZ: 'Europe/London'
-      ServerIP: 192.168.170.253
+      ServerIP: 192.168.170.254
       # WEBPASSWORD: 'set a secure password here or it will be random'
     # Volumes store your data between container upgrades
     volumes:
@@ -27,7 +27,7 @@ services:
     #  - NET_ADMIN # Recommended but not required (DHCP needs NET_ADMIN)      
     networks:
       piunbound:
-        ipv4_address: 192.168.170.253
+        ipv4_address: 192.168.170.254
     restart: unless-stopped
 
 networks:
